@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 import Link from "next/link";
 import { SelectedPage } from "@/shared/types";
@@ -8,7 +10,7 @@ type Props = {
   setSelectedPage: (value:SelectedPage)=>void,
 };
 
-const JournalLink = ({
+const ButlerLink = ({
   page,
   selectedPage,
   setSelectedPage,
@@ -19,12 +21,12 @@ const JournalLink = ({
 
   return (
     selectedPage === lowerCasePage ? `${page}` :(<Link
-      className={'hover:text-primary-300'}
+      className={'rounded p-2 hover:bg-primary-300 hover:text-white'}
       onClick={()=>{setSelectedPage(lowerCasePage)}}
        href= {`/${page}`} >
-      <p>{page}</p>
+      {page}
       </Link>)
     )
 }
 
-export default JournalLink;
+export default ButlerLink;

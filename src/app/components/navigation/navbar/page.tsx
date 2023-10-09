@@ -1,9 +1,10 @@
 "use client"
 import React, {useState} from "react";
-import JournalLink from "./JournalLink";
+import ButlerLink from "@/shared/ButlerLink";
 import { SelectedPage } from "@/shared/types";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { Bars3Icon } from "@heroicons/react/20/solid";
+import ActionButton from "@/shared/ActionButton";
 
 type Props = {
   selectedPage: SelectedPage,
@@ -26,7 +27,7 @@ const Navbar = ({
   const currentLink = (pageName:string)=>{
     const lowerCasePage = pageName.toLowerCase();
 
-    return (selectedPage === lowerCasePage ? <div>{pageName}</div> : (<JournalLink
+    return (selectedPage === lowerCasePage ? <div>{pageName}</div> : (<ButlerLink
       page={`${pageName}`}
       selectedPage={selectedPage}
       setSelectedPage = {setSelectedPage} />))
@@ -36,19 +37,21 @@ const Navbar = ({
     {isAboveMediumScreens ? ( <div className={`${flexBetween} fixed top-0 z-30 w-full py-6`}>
       <div className={`${flexBetween} mx-auto w-5/6 gap-8`}>
          <div className={`${flexBetween} w-full gap-8`}>
-           {/*Right Side*/}
+
            {currentLink(SelectedPage.Home)}
 
            {currentLink(SelectedPage.About)}
 
            {currentLink(SelectedPage.ContactUs)}
 
-         </div>
-         <div className={`${flexBetween} w-full gap-8`}>
-           {/*Left Side*/}
-           {currentLink(SelectedPage.SignUp)}
-
            {currentLink(SelectedPage.SignIn)}
+
+           <ActionButton
+           cta="Join Us"
+           selectedPage={selectedPage}
+           setSelectedPage={()=>setSelectedPage}
+           href={`${selectedPage}`} />
+
          </div>
       </div>
     </div>) : (<button

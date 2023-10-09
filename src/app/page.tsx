@@ -9,7 +9,7 @@ import { SelectedPage } from "@/shared/types";
 export default function Home() {
   const [selectedPage, setSelectedPage] = useState<SelectedPage>(SelectedPage.Home);
   return(
-    <main className ="bg-beige-50">
+    <main className ="bg-beige-50 p-10">
       <Navbar
       selectedPage={selectedPage}
       setSelectedPage = {setSelectedPage}  />

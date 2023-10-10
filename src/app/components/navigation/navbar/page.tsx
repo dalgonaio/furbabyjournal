@@ -7,13 +7,11 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid";
 import ActionButton from "@/shared/ActionButton";
 
 type Props = {
-  isNavTopOfPage: boolean,
   selectedPage: SelectedPage,
   setSelectedPage: (value:SelectedPage)=>void,
 };
 
 const Navbar = ({
-  isNavTopOfPage,
   selectedPage = SelectedPage.Home,
   setSelectedPage,
 } : Props) => {
@@ -24,9 +22,6 @@ const Navbar = ({
   const [isMenuOpen, setIsMenuOpen] = useState<Boolean>(false);
 
   const flexBetween = "flex items-center justify-between";
-  //highlight navbar w diff background if scrolled down
-  const navbarBackground = isNavTopOfPage ? "": "bg-beige-100 drop-shadow"
-
 
   const currentLink = (pageName:string)=>{
     const lowerCasePage = pageName.toLowerCase();
@@ -44,7 +39,7 @@ const Navbar = ({
   {currentLink(SelectedPage.SignIn)}</>)
 
   return (<nav className= 'p-8'>
-    {isAboveMediumScreens ? ( <div className={`${navbarBackground} ${flexBetween} fixed top-0 z-30 w-full py-6`}>
+    {isAboveMediumScreens ? ( <div className={`${flexBetween} sticky fixed top-0 z-30 w-full py-6`}>
       <div className={`${flexBetween} mx-auto w-5/6 gap-8`}>
          <div className={`${flexBetween} w-full gap-8`}>
 

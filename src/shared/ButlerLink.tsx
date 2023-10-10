@@ -23,7 +23,7 @@ const ButlerLink = ({
     selectedPage === lowerCasePage ? `${page}` :(<Link
       className='rounded p-4 hover:text-secondary-500'
       onClick={()=>{setSelectedPage(lowerCasePage)}}
-       href= {`/${page}`} >
+       href= {`/${lowerCasePage}`} >
       {page}
       </Link>)
     )

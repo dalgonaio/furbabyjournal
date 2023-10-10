@@ -18,7 +18,7 @@ export default function Home() {
         <div className={`${flexStyle} items-center justify-between`} >
           <div className="flex-col justify-around">
           {/*Headings*/}
-            <div className="p-8 font-montserrat font-bold text-7xl text-gray-500">CAT BUTLER</div>
+            <div className="p-10 font-montserrat font-bold text-7xl text-gray-500">CAT BUTLER</div>
             <div className="flex text-gray-500 text-lg justify-center">
             {/*copy*/}
               Managing your pet&apos;s health made simple

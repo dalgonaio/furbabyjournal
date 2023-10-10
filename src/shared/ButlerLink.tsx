@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import { SelectedPage } from "@/shared/types";
 
 type Props = {
   page: string,
@@ -13,7 +12,7 @@ const ButlerLink = ({
 } : Props): React.JSX.Element | string => {
 
   //Alias path to enum type
-  const lowerCasePage = page.toLowerCase().replace(/ /g, "") as SelectedPage;
+  const lowerCasePage = page.toLowerCase().replace(/ /g, "");
 
   return (
      <Link

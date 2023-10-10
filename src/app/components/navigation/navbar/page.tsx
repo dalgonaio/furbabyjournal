@@ -7,13 +7,9 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid";
 import ActionButton from "@/shared/ActionButton";
 
 type Props = {
-  selectedPage: SelectedPage,
-  setSelectedPage: (value:SelectedPage)=>void,
 };
 
 const Navbar = ({
-  selectedPage = SelectedPage.Home,
-  setSelectedPage,
 } : Props) => {
  //resize if above medium screen size
   const isAboveMediumScreens = useMediaQuery('(min-width: 1060px)');
@@ -25,11 +21,7 @@ const Navbar = ({
 
   const currentLink = (pageName:string)=>{
     const lowerCasePage = pageName.toLowerCase();
-
-    return (selectedPage === lowerCasePage ? <div>{pageName}</div> : (<ButlerLink
-      page={`${pageName}`}
-      selectedPage={selectedPage}
-      setSelectedPage = {setSelectedPage} />))
+    return  (<ButlerLink page={`${pageName}`} />);
   }
 
   const menuItemsSansRegister = (<>
@@ -47,8 +39,6 @@ const Navbar = ({
 
            <ActionButton
            cta="Join Us"
-           selectedPage={SelectedPage.SignUp}
-           setSelectedPage={()=>setSelectedPage}
            href={`${SelectedPage.SignUp}`} />
 
          </div>

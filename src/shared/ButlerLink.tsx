@@ -6,27 +6,22 @@ import { SelectedPage } from "@/shared/types";
 
 type Props = {
   page: string,
-  selectedPage: SelectedPage,
-  setSelectedPage: (value:SelectedPage)=>void,
 };
 
 const ButlerLink = ({
   page,
-  selectedPage,
-  setSelectedPage,
 } : Props): React.JSX.Element | string => {
 
   //Alias path to enum type
   const lowerCasePage = page.toLowerCase().replace(/ /g, "") as SelectedPage;
 
   return (
-    selectedPage === lowerCasePage ? `${page}` :(<Link
+     <Link
       className='rounded p-4 hover:text-secondary-500'
-      onClick={()=>{setSelectedPage(lowerCasePage)}}
-       href= {`/${lowerCasePage}`} >
+      href= {`/${lowerCasePage}`} >
       {page}
       </Link>)
-    )
+
 }
 
 export default ButlerLink;

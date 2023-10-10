@@ -13,7 +13,7 @@ type Props = {
 const ActionButton = ({cta, setSelectedPage, selectedPage, href}: Props) =>{
   return (
     <Link
-     className = {'bg-secondary-500 rounded p-2 hover:text-white'}
+     className = 'bg-secondary-500 rounded p-4 hover:text-white'
       href= {href}
     //lupin update set page
     onClick={()=>{setSelectedPage(selectedPage)}}

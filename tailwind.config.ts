@@ -2,11 +2,8 @@ import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
-    //All of the files tailwind applies to
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/shared/**/*.{js,ts,jsx,tsx,mdx}',
+    //All of the files tailwind applies to in src
+    './src/**/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
@@ -15,11 +12,11 @@ const config: Config = {
         "gray-50": "#EFE6E6",
         "gray-100": "#DFCCCC",
         "gray-500": "#5E0000",
-        "beige-50": "#fff7f0",
-        "beige-100": "#CAD2C5",
-        "primary-100": "#354F52",
-        "primary-300": "#2c4555",
-        "primary-500": "#2F3E46",
+        "beige-50": "#fff7ed",
+        "beige-100": "#ffedd5",
+        "primary-100": "#92400e",
+        "primary-300": "#78350f",
+        "primary-500": "#451a03",
         "secondary-400": "#84A98C",
         "secondary-500":"#52796F",
       },

@@ -9,10 +9,11 @@ type Props = {
 };
 
 const ActionButton = ({cta, href}: Props) =>{
+  const lowerCasePage = href.toLowerCase().replace(/ /g, "");
   return (
     <Link
      className = 'bg-secondary-500 rounded p-4 hover:text-white'
-      href= {href}
+      href= {lowerCasePage}
     >{cta}</Link>
   )
 };

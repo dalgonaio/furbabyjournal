@@ -14,10 +14,12 @@ const ButlerLink = ({
   //Alias path to enum type
   const lowerCasePage = page.toLowerCase().replace(/ /g, "");
 
+  const newPage = lowerCasePage === 'home' ? '/': `${lowerCasePage}`;
+
   return (
      <Link
       className='rounded p-4 hover:text-secondary-500'
-      href= {`/${lowerCasePage}`} >
+      href= {newPage} >
       {page}
       </Link>)
 

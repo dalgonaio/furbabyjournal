@@ -20,7 +20,6 @@ const Navbar = ({
   const flexBetween = "flex items-center justify-between";
 
   const currentLink = (pageName:string)=>{
-    const lowerCasePage = pageName.toLowerCase();
     return  (<ButlerLink page={`${pageName}`} />);
   }
 

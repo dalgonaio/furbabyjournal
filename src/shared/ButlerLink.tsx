@@ -18,7 +18,7 @@ const ButlerLink = ({
 
   return (
      <Link
-      className='rounded p-4 hover:text-secondary-500'
+      className='rounded p-4 text-gray-500 hover:text-secondary-500'
       href= {newPage} >
       {page}
       </Link>)

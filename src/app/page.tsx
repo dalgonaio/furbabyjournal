@@ -5,6 +5,7 @@ import Image from 'next/image';
 import ActionButton from "@/shared/ActionButton";
 import ButlerLink from "@/shared/ButlerLink";
 import cats_dogs_small from "@/assets/cats_dogs_small.jpg"
+import About from "./about/page";
 
 export default function Home() {
 
@@ -41,6 +42,9 @@ export default function Home() {
           <Image className="rounded-lg blur-[1px] p-4" src={cats_dogs_small} alt="home image" />
           </div>
         </div>
+
+      {/*About Product*/}
+      <About />
 
 
     </main>

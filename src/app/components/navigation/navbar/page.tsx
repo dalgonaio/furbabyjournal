@@ -20,7 +20,7 @@ const Navbar = ({
   const flexBetween = "flex items-center justify-between";
 
   const currentLink = (pageName:string)=>{
-    return  (<ButlerLink page={`${pageName}`} />);
+    return  (<ButlerLink label = {pageName} page={`${pageName}`} />);
   }
 
   const menuItemsSansRegister = (<>
@@ -50,7 +50,7 @@ const Navbar = ({
     </button>)}
     {/*Mobile Menu Modal*/}
     {!isAboveMediumScreens && isMenuOpen && (
-      <div className="fixed right-0 bottom-0 z-40 h-full w-[300px] bg-beige-100 drop-shadow-xl">
+      <div className="fixed left-0 bottom-0 z-40 h-full w-[300px] bg-beige-100 drop-shadow-xl">
         {/* close icon */}
           <div
           className="flex justify-end p-12 text-gray-50"

@@ -4,10 +4,12 @@ import React from "react";
 import Link from "next/link";
 
 type Props = {
+  label: string,
   page: string,
 };
 
 const ButlerLink = ({
+  label,
   page,
 } : Props): React.JSX.Element | string => {
 
@@ -20,7 +22,7 @@ const ButlerLink = ({
      <Link
       className='rounded p-4 text-gray-500 hover:text-secondary-500'
       href= {newPage} >
-      {page}
+      {label}
       </Link>)
 
 }

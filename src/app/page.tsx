@@ -3,6 +3,7 @@
 import useMediaQuery from "@/hooks/useMediaQuery";
 import Image from 'next/image';
 import ActionButton from "@/shared/ActionButton";
+import ButlerLink from "@/shared/ButlerLink";
 import cats_dogs_small from "@/assets/cats_dogs_small.jpg"
 
 export default function Home() {
@@ -18,10 +19,21 @@ export default function Home() {
         <div className={`${flexStyle} items-center justify-between`} >
           <div className="flex-col justify-around">
           {/*Headings*/}
-            <div className="p-10 font-montserrat font-bold text-7xl text-gray-500">CAT BUTLER</div>
+            <div className="p-10 font-montserrat font-bold text-7xl text-gray-500">
+              {/*Title*/}
+              CAT BUTLER
+              </div>
             <div className="flex text-gray-500 text-lg justify-center">
-            {/*copy*/}
+                {/*copy*/}
               Managing your pet&apos;s health made simple
+            </div>
+            <div className="flex justify-around p-12 justify-center">
+              {/*Actions*/}
+            <ActionButton
+              href='/signup'
+              cta="Join Now" />
+
+            <ButlerLink label = "Learn More" page="About" />
             </div>
             </div>
           <div>

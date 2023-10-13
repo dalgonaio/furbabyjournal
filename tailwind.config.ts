@@ -4,6 +4,8 @@ const config: Config = {
   content: [
     //All of the files tailwind applies to in src
     './src/**/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+
   ],
   theme: {
     extend: {

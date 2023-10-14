@@ -5,6 +5,8 @@ import { SelectedPage } from "@/shared/types";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid";
 import ActionButton from "@/shared/ActionButton";
+import Image from "next/image";
+import PetButlerLogo from "@/assets/PetButlerLogo.png";
 
 type Props = {
 };
@@ -32,6 +34,7 @@ const Navbar = ({
   return (<nav className= 'p-8'>
     {isAboveMediumScreens ? ( <div className={`${flexBetween} sticky fixed top-0 z-30 w-full py-6`}>
       <div className={`${flexBetween} mx-auto w-5/6 gap-8`}>
+      <Image className="rounded-lg" height={80} src={PetButlerLogo} alt="contact image" />
          <div className={`${flexBetween} w-full gap-8`}>
 
          {menuItemsSansRegister}

@@ -22,7 +22,7 @@ export default function Home() {
           {/*Headings*/}
             <div className="p-10 font-montserrat font-bold text-7xl text-gray-500">
               {/*Title*/}
-              CAT BUTLER
+              PET BUTLER
               </div>
             <div className="flex text-gray-500 text-lg justify-center">
                 {/*copy*/}

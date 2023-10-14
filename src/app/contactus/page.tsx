@@ -21,7 +21,8 @@ const ContactUs = (props: Props) => {
     }
   }
 
-  const formInputClass = "mt-5 w-full rounded-lg bg-secondary-500 border-secondary-500 px-5 py-3 placeholder-white";
+
+  const formInputClass = "mt-5 w-full rounded-lg bg-primary-500 border-primary-500 px-5 py-3 placeholder-white";
 
   return (
     <section id="contactus" className="mx-auto w-5/6 pt-25 pb-32">
@@ -87,8 +88,7 @@ const ContactUs = (props: Props) => {
               {errors.message.type==="maxLength" && "Max length is 2000 characters."}
             </p>
           )}
-
-          <button type= "submit" className = "mt-5 rounded-lg bg-secondary-500 px-20 py-3 transition duration-500 hover:text-white">
+          <button type= "submit" className = "mt-5 rounded-lg bg-primary-500 px-20 py-3 transition duration-500 hover:text-white">
             SUBMIT
           </button>
         </form>

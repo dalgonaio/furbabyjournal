@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, {useState} from 'react';
 import Axios from 'axios';
 
 //Components
@@ -19,6 +19,8 @@ interface IFormInputs {
 }
 
 const JoinUs = (props: Props) => {
+  const [currentErrorMessage, setCurrentErrorMessage] = useState<string | null>(null);
+
   const {
     register,
     formState: {errors},
@@ -29,12 +31,21 @@ const JoinUs = (props: Props) => {
 
   const onSubmit: SubmitHandler<IFormInputs> = async (data, event) => {
     event?.preventDefault();
-    const response = await Axios.post('http://localhost:3001/users/', data);
-    if (response.data.status === 201) {
-      //Jungmee - Update so that user are auto logged in and re-routed to dashboard
-      router.push('/');
+    try {
+      const response = await Axios.post('http://localhost:3001/users/', data);
+
+      if (response.status === 201) {
+        //Route user to home
+        router.push('/');
+      }
+    } catch (error) {
+      setCurrentErrorMessage('Sorry, something went wrong. Please try again.');
     }
   };
+
+  const showErrorMessage = currentErrorMessage ? (
+    <p className="text-red-700">{currentErrorMessage}</p>
+  ) : null;
 
   const formInputClass =
     'mt-5 w-full rounded-lg bg-primary-400 border-primary-400 px-5 py-3 placeholder-white';
@@ -45,6 +56,7 @@ const JoinUs = (props: Props) => {
       <p className="my-5">
         Join the community of butlers now for access to the health monitoring application.
       </p>
+      {showErrorMessage}
       <div className="mt-10 justify-between gap-8 md:flex">
         {/* form for registering */}
         <form onSubmit={handleSubmit(onSubmit)}>

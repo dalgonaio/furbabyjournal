@@ -1,5 +1,6 @@
 'use client';
 import React, {useState} from 'react';
+import Link from 'next/link';
 import ButlerLink from '@/shared/ButlerLink';
 import {SelectedPage} from '@/shared/types';
 import useMediaQuery from '@/hooks/useMediaQuery';
@@ -23,12 +24,11 @@ const Navbar = ({}: Props) => {
     return <ButlerLink label={pageName} page={`${pageName}`} />;
   };
 
-  const menuItemsSansRegister = (
+  const menuItemsSansLoginRegister = (
     <>
       {currentLink(SelectedPage.Home)}
       {currentLink(SelectedPage.About)}
       {currentLink(SelectedPage.ContactUs)}
-      {currentLink(SelectedPage.SignIn)}
     </>
   );
 
@@ -39,7 +39,13 @@ const Navbar = ({}: Props) => {
           <div className={`${flexBetween} mx-auto w-5/6 gap-8`}>
             <Image className="rounded-lg" height={80} src={PetButlerLogo} alt="contact image" />
             <div className={`${flexBetween} w-full gap-8`}>
-              {menuItemsSansRegister}
+              {menuItemsSansLoginRegister}
+              <Link
+                className="rounded p-4 text-gray-500 hover:text-primary-500"
+                href="/api/auth/login"
+              >
+                Log In
+              </Link>
 
               <ActionButton cta="Join Us" href={`${SelectedPage.JoinUs}`} />
             </div>
@@ -66,7 +72,15 @@ const Navbar = ({}: Props) => {
             <XMarkIcon className="h-6 w-6" />
           </div>
           {/* Other Menu Items */}
-          <div className={`ml-[33%] flex flex-col gap-10 text-xl`}>{menuItemsSansRegister}</div>
+          <div className={`ml-[33%] flex flex-col gap-10 text-xl`}>
+            {menuItemsSansLoginRegister}
+            <Link
+              className="rounded p-4 text-gray-500 hover:text-primary-500"
+              href="/api/auth/login"
+            >
+              Log In
+            </Link>
+          </div>
         </div>
       )}
     </nav>

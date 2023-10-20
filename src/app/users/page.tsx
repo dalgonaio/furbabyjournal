@@ -1,7 +1,7 @@
+'use client';
 import React from 'react';
+import {withPageAuthRequired} from '@auth0/nextjs-auth0/client';
 
-const UsersPage = () =>{
-  return (<div>UsersPage</div>)
-}
-
-export default UsersPage;
+export default withPageAuthRequired(function UsersPage() {
+  return <div>UsersPage Test WIP</div>;
+});

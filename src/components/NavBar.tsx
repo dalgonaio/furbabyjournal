@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import Link from 'next/link';
 import ButlerLink from '@/shared/ButlerLink';
 import {useUser} from '@auth0/nextjs-auth0/client';
+
 import {SelectedPage} from '@/shared/types';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/20/solid';
@@ -34,6 +35,8 @@ const Navbar = ({}: Props) => {
       {currentLink(SelectedPage.ContactUs)}
     </>
   );
+
+  console.log('lupin user?', user);
 
   const logInOrOutLink = (
     <>

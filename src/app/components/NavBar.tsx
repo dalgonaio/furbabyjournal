@@ -2,6 +2,7 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
 import ButlerLink from '@/shared/ButlerLink';
+import {useUser} from '@auth0/nextjs-auth0/client';
 import {SelectedPage} from '@/shared/types';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/20/solid';
@@ -12,6 +13,8 @@ import PetButlerLogo from '@/assets/PetButlerLogo.png';
 type Props = {};
 
 const Navbar = ({}: Props) => {
+  const {user, isLoading} = useUser();
+
   //resize if above medium screen size
   const isAboveMediumScreens = useMediaQuery('(min-width: 1060px)');
 
@@ -32,6 +35,23 @@ const Navbar = ({}: Props) => {
     </>
   );
 
+  const logInOrOutLink = (
+    <>
+      {/*Log In Link */}
+      {!isLoading && !user && (
+        <Link className="rounded p-4 text-gray-500 hover:text-primary-500" href="/api/auth/login">
+          Log In
+        </Link>
+      )}
+      {/*Log Out Link*/}
+      {user && (
+        <Link className="rounded p-4 text-gray-500 hover:text-primary-500" href="/api/auth/logout">
+          Log Out
+        </Link>
+      )}
+    </>
+  );
+
   return (
     <nav className="p-8">
       {isAboveMediumScreens ? (
@@ -40,12 +60,7 @@ const Navbar = ({}: Props) => {
             <Image className="rounded-lg" height={80} src={PetButlerLogo} alt="contact image" />
             <div className={`${flexBetween} w-full gap-8`}>
               {menuItemsSansLoginRegister}
-              <Link
-                className="rounded p-4 text-gray-500 hover:text-primary-500"
-                href="/api/auth/login"
-              >
-                Log In
-              </Link>
+              {logInOrOutLink}
 
               <ActionButton cta="Join Us" href={`${SelectedPage.JoinUs}`} />
             </div>
@@ -74,12 +89,7 @@ const Navbar = ({}: Props) => {
           {/* Other Menu Items */}
           <div className={`ml-[33%] flex flex-col gap-10 text-xl`}>
             {menuItemsSansLoginRegister}
-            <Link
-              className="rounded p-4 text-gray-500 hover:text-primary-500"
-              href="/api/auth/login"
-            >
-              Log In
-            </Link>
+            {logInOrOutLink}
           </div>
         </div>
       )}

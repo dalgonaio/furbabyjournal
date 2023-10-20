@@ -55,7 +55,7 @@ const Navbar = ({}: Props) => {
       )}
       {/*Mobile Menu Modal*/}
       {!isAboveMediumScreens && isMenuOpen && (
-        <div className="fixed left-0 bottom-0 z-40 h-full w-[300px] bg-beige-100 drop-shadow-xl">
+        <div className="fixed left-0 bottom-0 z-40 h-full w-[300px] bg-beige-50 drop-shadow-xl">
           {/* close icon */}
           <div
             className="flex justify-end p-12 text-gray-500"

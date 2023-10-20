@@ -8,13 +8,13 @@
 }
 
 body {
-  @apply bg-beige-50;
+  @apply bg-beige-0;
   padding: 1rem;
 }
 
 .app {
   height: 100%;
   width: 100%;
-  font-family: "DM Sans", sans-seriff;
+  font-family: 'DM Sans', sans-seriff;
   @apply text-gray-300;
 }

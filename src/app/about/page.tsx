@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React from 'react';
 import Header1 from '@/shared/Header1';
 import {FolderIcon, ChartBarSquareIcon, PencilSquareIcon} from '@heroicons/react/20/solid';
 import {BenefitType} from '@/shared/types';
@@ -48,10 +48,6 @@ const About = () => {
             description={benefit.description}
           />
         ))}
-      </div>
-      <div>
-        Test
-        <a href="/users">Users Test Page</a>
       </div>
     </section>
   );

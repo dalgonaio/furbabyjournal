@@ -10,6 +10,9 @@ import {useForm, SubmitHandler} from 'react-hook-form';
 import Image from 'next/image';
 import cat_dog_meet from '../../assets/cat_dog_meet.jpg';
 
+import ProtectedLink from '@/shared/ProtectedLink';
+import {useUser} from '@auth0/nextjs-auth0/client';
+
 type Props = {};
 
 interface IFormInputs {
@@ -20,6 +23,8 @@ interface IFormInputs {
 
 const JoinUs = (props: Props) => {
   const [currentErrorMessage, setCurrentErrorMessage] = useState<string | null>(null);
+
+  const {user} = useUser() || {};
 
   const {
     register,
@@ -117,6 +122,7 @@ const JoinUs = (props: Props) => {
           />
         </div>
       </div>
+      <ProtectedLink user={user} destinationPage="/users" label="Users" />
     </section>
   );
 };

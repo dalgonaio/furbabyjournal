@@ -11,6 +11,8 @@ import ActionButton from '@/shared/ActionButton';
 import Image from 'next/image';
 import PetButlerLogo from '@/assets/PetButlerLogo.png';
 
+import ProtectedLink from '@/shared/ProtectedLink';
+
 type Props = {};
 
 const Navbar = ({}: Props) => {
@@ -36,8 +38,6 @@ const Navbar = ({}: Props) => {
     </>
   );
 
-  console.log('lupin user?', user);
-
   const logInOrOutLink = (
     <>
       {/*Log In Link */}
@@ -46,6 +46,8 @@ const Navbar = ({}: Props) => {
           Log In
         </Link>
       )}
+      {/*Dashboard*/}
+      {user && <ProtectedLink user={user} destinationPage="/dashboard" label="Dashboard" />}
       {/*Log Out Link*/}
       {user && (
         <Link className="rounded p-4 text-gray-500 hover:text-primary-500" href="/api/auth/logout">

@@ -122,7 +122,7 @@ const JoinUs = (props: Props) => {
           />
         </div>
       </div>
-      <ProtectedLink user={user} destinationPage="/users" label="Users" />
+      {/* <ProtectedLink user={user} destinationPage="/users" label="Users" /> */}
     </section>
   );
 };

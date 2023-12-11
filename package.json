@@ -32,5 +32,5 @@
   "devDependencies": {
     "@types/react-anchor-link-smooth-scroll": "^1.0.3"
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://pet-butler-be-6b33626d70a0.herokuapp.com"
 }

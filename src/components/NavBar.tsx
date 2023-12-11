@@ -7,7 +7,6 @@ import {useUser} from '@auth0/nextjs-auth0/client';
 import {SelectedPage} from '@/shared/types';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/20/solid';
-import ActionButton from '@/shared/ActionButton';
 import Image from 'next/image';
 import PetButlerLogo from '@/assets/PetButlerLogo.png';
 
@@ -42,9 +41,14 @@ const Navbar = ({}: Props) => {
     <>
       {/*Log In Link */}
       {!isLoading && !user && (
-        <Link className="rounded p-4 text-gray-500 hover:text-primary-500" href="/api/auth/login">
-          Log In
-        </Link>
+        <>
+          <Link className="rounded p-4 text-gray-500 hover:text-primary-500" href="/api/auth/login">
+            Log In
+          </Link>
+          <Link className="rounded p-4 text-gray-500 hover:text-primary-500" href="/api/auth/login">
+            Join Us
+          </Link>
+        </>
       )}
       {/*Dashboard*/}
       {user && <ProtectedLink user={user} destinationPage="/dashboard" label="Dashboard" />}
@@ -66,8 +70,6 @@ const Navbar = ({}: Props) => {
             <div className={`${flexBetween} w-full gap-8`}>
               {menuItemsSansLoginRegister}
               {logInOrOutLink}
-
-              <ActionButton cta="Join Us" href={`${SelectedPage.JoinUs}`} />
             </div>
           </div>
         </div>

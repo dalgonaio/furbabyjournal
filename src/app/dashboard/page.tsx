@@ -3,6 +3,7 @@
 import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
 import {useUser} from '@auth0/nextjs-auth0/client';
+import useMediaQuery from '@/hooks/useMediaQuery';
 
 // Components
 import Header1 from '@/shared/Header1';
@@ -10,6 +11,8 @@ import Header2 from '@/shared/Header2';
 import Image from 'next/image';
 import ActionButton from '@/shared/ActionButton';
 import cat_dog_meet from '../../assets/cat_dog_meet.jpg';
+import cool_cat from '../../assets/cool_cat.jpg';
+import cool_dog from '../../assets/cool_dog.jpg';
 
 type Props = {};
 
@@ -17,6 +20,9 @@ const Dashboard = (props: Props) => {
   const [userData, setUserData] = useState<any | null>(null); // State to store user data
   const [petsData, setPetsData] = useState<any | null>(null); // State to store user data
   const {user} = useUser() || '';
+
+  const isAboveMediumScreens = useMediaQuery('(min-width:1060px)');
+  const flexStyle = isAboveMediumScreens ? 'flex' : 'flex-column';
 
   const getData = async (userId: string) => {
     try {
@@ -45,8 +51,16 @@ const Dashboard = (props: Props) => {
         Accept: '*/*',
       };
 
+      //Lupin Heroku
+      // const reqOptions = {
+      //   url: `https://pet-butler-be-6b33626d70a0.herokuapp.com/pets/${userId}`,
+      //   method: 'GET',
+      //   headers: headersList,
+      // };
+
+      //Lupin Local
       const reqOptions = {
-        url: `https://pet-butler-be-6b33626d70a0.herokuapp.com/pets/${userId}`,
+        url: `http://localhost:3001/pets/${userId}`,
         method: 'GET',
         headers: headersList,
       };
@@ -70,9 +84,53 @@ const Dashboard = (props: Props) => {
 
   console.log('lupin do they have pets?', petsData);
 
-  const activePetInfo = petsData
-    ? 'Data here'
-    : 'Looks like you have not added your furry overlords yet.';
+  const petImage = (petType: String) => {
+    const catOrDog = petType == 'cat' ? cool_cat : cool_dog;
+
+    return (
+      <div className="pt-8 pb-8">
+        <Image
+          src={catOrDog}
+          alt="individual temp pet image"
+          className="rounded-lg"
+          width={300}
+          height={300}
+        />
+      </div>
+    );
+  };
+
+  type Pet = {
+    pet_id: Number;
+    pet_name: String;
+    rfid_chip_id: String;
+    pet_type: String;
+    breed: String;
+    date_of_birth: String;
+    gender: String;
+    image_url: String;
+    user_id: Number | null;
+    auth0_sid: String;
+  };
+
+  const petsDataTable = petsData?.map((pet: Pet, i: Number) => (
+    <div key={pet.pet_id.toString()} className="mr-16">
+      <div>
+        {/*Image */}
+        {petImage(pet.pet_type)}
+      </div>
+      <div>
+        {/*Info */}
+        {pet.pet_name}
+      </div>
+    </div>
+  ));
+
+  const activePetInfo = petsData ? (
+    <div className={`${flexStyle} items-center justify-between`}>{petsDataTable}</div>
+  ) : (
+    'Looks like you have not added your furry overlords yet.'
+  );
 
   return (
     <section id="Dashboard" className="mx-auto w-5/6 pt-25 pb-32">
@@ -89,11 +147,11 @@ const Dashboard = (props: Props) => {
         <div>
           {activePetInfo}
           <div className="pt-10 pb-10">
-            <ActionButton cta="Add Pet" href={'/'} />
+            <ActionButton cta="Add Pet" href={'/addapet'} />
           </div>
         </div>
         {/*Image*/}
-        <div className="pt-6">
+        <div className="pt-6 mr-10">
           <Image
             src={cat_dog_meet}
             alt="dashboard cat meets dog"

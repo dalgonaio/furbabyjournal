@@ -16,9 +16,12 @@ import {useUser} from '@auth0/nextjs-auth0/client';
 type Props = {};
 
 interface IFormInputs {
-  firstName: string;
-  lastName: string;
-  email: string;
+  petName: string;
+  rfid: string;
+  petType: string;
+  breed: string;
+  dob: Date;
+  gender: string;
 }
 
 const AddAPet = (props: Props) => {
@@ -96,7 +99,7 @@ const AddAPet = (props: Props) => {
             placeholder="RFID Chip Number"
             {...register('rfid', {required: false, maxLength: 100})}
           />
-          <div className="mt-5" text="white">
+          <div className="mt-5" data-color="white">
             <select
               {...register('petType')}
               className={formInputClass} // Apply the same class as other input fields
@@ -126,7 +129,7 @@ const AddAPet = (props: Props) => {
             placeholder="Date of Birth"
             {...register('dob', {required: false, maxLength: 100})}
           />
-          <div className="mt-5" text="white">
+          <div className="mt-5" data-color="white">
             <select
               {...register('gender')}
               className={formInputClass} // Apply the same class as other input fields

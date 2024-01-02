@@ -147,7 +147,7 @@ const Dashboard = (props: Props) => {
         <div>
           {activePetInfo}
           <div className="pt-10 pb-10">
-            <ActionButton cta="Add Pet" href={'/'} />
+            <ActionButton cta="Add Pet" href={'/addapet'} />
           </div>
         </div>
         {/*Image*/}

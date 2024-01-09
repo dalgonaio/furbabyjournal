@@ -1,6 +1,6 @@
 'use client';
 
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, ChangeEvent} from 'react';
 import Axios from 'axios';
 
 //Components
@@ -20,13 +20,13 @@ interface IFormInputs {
   petId: number;
   foodBrand: string;
   portionSize: string;
-  calPerPortion: number;
+  caloriesPerPortion: number;
   portionsConsumed: number;
 }
 
 const AddFood = (props: Props) => {
   const [currentErrorMessage, setCurrentErrorMessage] = useState<string | null>(null);
-  const [currentPet, setCurrentPet] = useState<string | null>(null);
+  const [currentPet, setCurrentPet] = useState<string | number | null>(null);
   const [availablePets, setAvailablePets] = useState<{petId: number; petName: String}[] | null>(
     null
   );
@@ -76,19 +76,36 @@ const AddFood = (props: Props) => {
     }
   }, [user]);
 
+  function getFormattedDate(): string {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Month is zero-based
+    const day = String(today.getDate()).padStart(2, '0');
+
+    return `${year}${month}${day}`;
+  }
+
   const onSubmit: SubmitHandler<IFormInputs> = async (data, event) => {
     event?.preventDefault();
     try {
-      const formattedAuthOId = user?.sub?.slice(6) || '';
+      const todaysDate = getFormattedDate();
 
       const headersList = {
         Accept: '*/*',
       };
+      //Lupin remove local dev
+      // const reqOptions = {
+      //   url: `https://pet-butler-be-6b33626d70a0.herokuapp.com/petFood/${currentPet}`,
+      //   method: 'POST',
+      //   headers: headersList,
+      //   data: formattedData,
+      // };
+      const formattedData = {...data, date: todaysDate};
       const reqOptions = {
-        url: `https://pet-butler-be-6b33626d70a0.herokuapp.com/pets/${formattedAuthOId}`,
+        url: `http://localhost:3001/petFood/${currentPet}`,
         method: 'POST',
         headers: headersList,
-        data: data,
+        data: formattedData,
       };
 
       const response = await Axios.request(reqOptions);
@@ -113,9 +130,9 @@ const AddFood = (props: Props) => {
     });
   };
 
-  const showErrorMessage = currentErrorMessage ? (
-    <p className="text-red-700">{currentErrorMessage}</p>
-  ) : null;
+  const handleSelectPet = (event: ChangeEvent<HTMLSelectElement>) => {
+    setCurrentPet(event?.target?.value);
+  };
 
   const formInputClass =
     'mt-5 w-full rounded-lg bg-primary-400 border-primary-400 px-5 py-3 placeholder-white';
@@ -129,9 +146,10 @@ const AddFood = (props: Props) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mt-5" data-color="white">
             <select
-              {...register('petId')}
+              {...register('petId', {required: true})}
               className={formInputClass} // Apply the same class as other input fields
               style={{color: 'white'}}
+              onChange={handleSelectPet}
             >
               <option value="">Pet</option>
               {petOptions()}
@@ -142,13 +160,13 @@ const AddFood = (props: Props) => {
             type="text"
             className={formInputClass}
             style={{color: 'white'}}
-            placeholder="Food Brand"
+            placeholder="Food Name or Nickname"
             {...register('foodBrand', {required: true, maxLength: 100})}
           />
 
           <div className="mt-5" data-color="white">
             <select
-              {...register('portionSize')}
+              {...register('portionSize', {required: true})}
               className={formInputClass} // Apply the same class as other input fields
               style={{color: 'white'}}
             >
@@ -166,7 +184,7 @@ const AddFood = (props: Props) => {
             className={formInputClass}
             style={{color: 'white'}}
             placeholder="Calories per portion"
-            {...register('calPerPortion', {required: true})}
+            {...register('caloriesPerPortion', {required: true})}
           />
 
           <input

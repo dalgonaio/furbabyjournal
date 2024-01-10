@@ -5,7 +5,6 @@ import Datepicker, {DateValueType, DateRangeType} from 'react-tailwindcss-datepi
 import Header2 from '@/shared/Header2';
 import Image from 'next/image';
 import {useRouter} from 'next/navigation';
-import {FormatDate} from '@/shared/FormatDate';
 
 import cat_dog_meet from '../../assets/cat_dog_meet.jpg';
 

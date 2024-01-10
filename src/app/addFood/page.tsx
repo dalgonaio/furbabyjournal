@@ -24,6 +24,7 @@ interface IFormInputs {
 }
 
 const AddFood = (props: Props) => {
+  //DO NOT USE. Use Dyamic Version instead
   const [currentErrorMessage, setCurrentErrorMessage] = useState<string | null>(null);
   const [currentPet, setCurrentPet] = useState<string | number | null>(null);
   const [availablePets, setAvailablePets] = useState<{petId: number; petName: String}[] | null>(

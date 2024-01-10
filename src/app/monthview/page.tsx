@@ -1,21 +1,22 @@
 'use client';
 
 import React, {useState} from 'react';
-import Datepicker from 'react-tailwindcss-datepicker';
+import Datepicker, {DateValueType, DateRangeType} from 'react-tailwindcss-datepicker';
 import Header2 from '@/shared/Header2';
 import Image from 'next/image';
+import {useRouter} from 'next/navigation';
+import {FormatDate} from '@/shared/FormatDate';
 
 import cat_dog_meet from '../../assets/cat_dog_meet.jpg';
 
 const MonthView: React.FC = () => {
-  const [value, setValue] = useState({
-    startDate: null,
-    endDate: null,
-  });
+  const router = useRouter();
 
-  const handleValueChange = (newValue: any) => {
-    console.log('newValue:', newValue);
-    setValue(newValue);
+  const handleValueChange = (newValue: DateValueType | DateRangeType) => {
+    if (typeof newValue?.startDate == 'string') {
+      const formattedDate = newValue?.startDate?.replace(/-/g, '');
+      router.push(`/addfood/${formattedDate}`);
+    }
   };
 
   return (
@@ -28,7 +29,7 @@ const MonthView: React.FC = () => {
           <Datepicker
             asSingle={true}
             primaryColor={'indigo'}
-            value={value}
+            value={null}
             onChange={handleValueChange}
           />
         </div>

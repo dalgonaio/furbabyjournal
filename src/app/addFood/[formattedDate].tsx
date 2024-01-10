@@ -5,6 +5,7 @@ import Axios from 'axios';
 
 //Components
 import {useRouter} from 'next/navigation';
+import {useParams} from 'next/navigation';
 import Header1 from '@/shared/Header1';
 import {useForm, SubmitHandler} from 'react-hook-form';
 import Image from 'next/image';
@@ -23,7 +24,7 @@ interface IFormInputs {
   portionsConsumed: number;
 }
 
-const AddFood = (props: Props) => {
+const AddFoodByDatePage = (props: Props) => {
   const [currentErrorMessage, setCurrentErrorMessage] = useState<string | null>(null);
   const [currentPet, setCurrentPet] = useState<string | number | null>(null);
   const [availablePets, setAvailablePets] = useState<{petId: number; petName: String}[] | null>(
@@ -39,6 +40,8 @@ const AddFood = (props: Props) => {
   } = useForm<IFormInputs>();
 
   const router = useRouter();
+  const params = useParams<{tag: string; item: string}>();
+  console.log('lupin params', params);
 
   const getData = async (userId: String) => {
     try {
@@ -217,4 +220,4 @@ const AddFood = (props: Props) => {
   );
 };
 
-export default AddFood;
+export default AddFoodByDatePage;

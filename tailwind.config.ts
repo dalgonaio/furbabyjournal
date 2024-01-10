@@ -5,6 +5,7 @@ const config: Config = {
     //All of the files tailwind applies to in src
     './src/**/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/react-tailwindcss-datepicker/dist/index.esm.js',
   ],
   theme: {
     extend: {

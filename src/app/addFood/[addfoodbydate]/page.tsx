@@ -8,11 +8,9 @@ import {useRouter} from 'next/navigation';
 import Header1 from '@/shared/Header1';
 import {useForm, SubmitHandler} from 'react-hook-form';
 import Image from 'next/image';
-import cat_dog_meet from '../../assets/cat_dog_meet.jpg';
+import cat_dog_meet from '../../../assets/cat_dog_meet.jpg';
 
 import {useUser} from '@auth0/nextjs-auth0/client';
-
-type Props = {};
 
 interface IFormInputs {
   date: Date;
@@ -23,8 +21,7 @@ interface IFormInputs {
   portionsConsumed: number;
 }
 
-const AddFood = (props: Props) => {
-  //DO NOT USE. Use Dyamic Version instead
+const AddFoodDynamic = ({params}: any) => {
   const [currentErrorMessage, setCurrentErrorMessage] = useState<string | null>(null);
   const [currentPet, setCurrentPet] = useState<string | number | null>(null);
   const [availablePets, setAvailablePets] = useState<{petId: number; petName: String}[] | null>(
@@ -76,19 +73,10 @@ const AddFood = (props: Props) => {
     }
   }, [user]);
 
-  function getFormattedDate(): string {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0'); // Month is zero-based
-    const day = String(today.getDate()).padStart(2, '0');
-
-    return `${year}${month}${day}`;
-  }
-
   const onSubmit: SubmitHandler<IFormInputs> = async (data, event) => {
     event?.preventDefault();
     try {
-      const todaysDate = getFormattedDate();
+      const todaysDate = params.addfoodbydate;
 
       const headersList = {
         Accept: '*/*',
@@ -218,4 +206,4 @@ const AddFood = (props: Props) => {
   );
 };
 
-export default AddFood;
+export default AddFoodDynamic;

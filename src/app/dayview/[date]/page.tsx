@@ -1,15 +1,45 @@
 'use client';
-import React, {useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
+import Axios from 'axios';
 import Image from 'next/image';
 import cat_dog_meet from '../../../assets/cat_dog_meet.jpg';
 
-const DynamicDayView: React.FC = () => {
-  // Sample data for the table
-  const foodData = [
-    {foodName: 'Apple', portionSize: '1 medium', portionsConsumed: 2, totalCalories: 200},
-    {foodName: 'Chicken', portionSize: '100g', portionsConsumed: 1, totalCalories: 250},
-    // Add more rows as needed
-  ];
+const DynamicDayView: React.FC = ({params}: any) => {
+  //Lupin fix params type
+
+  type FoodDataType = Record<string, number>;
+  type FoodNamesType = string[];
+  const [foodData, setFoodData] = useState<FoodDataType>({});
+  const [foodNames, setFoodNames] = useState<FoodNamesType>([]);
+
+  const targetDate = params.todaysDate;
+
+  const getData = async (petId: Number) => {
+    try {
+      const headersList = {
+        Accept: '*/*',
+      };
+      //Lupin remove local dev
+      // const reqOptions = {
+      //   url: `https://pet-butler-be-6b33626d70a0.herokuapp.com/petFood/${petId}/${targetDate}`,
+      //   method: 'GET',
+      //   headers: headersList,
+      // };
+      const reqOptions = {
+        url: `http://localhost:3001/petFood/${petId}/${targetDate}`,
+        method: 'GET',
+        headers: headersList,
+      };
+      const response = await Axios.request(reqOptions);
+      const data = await response?.data?.message;
+      if (data) {
+        setFoodData(data.calorieData);
+        setFoodNames(data.names);
+      }
+    } catch (error) {
+      console.log('Error', error);
+    }
+  };
 
   return (
     <div className="flex justify-center">
@@ -20,37 +50,23 @@ const DynamicDayView: React.FC = () => {
             <tr>
               <th
                 scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                className="px-6 py-3 text-left text-xs font-medium text-beige-0 uppercase tracking-wider"
               >
                 Food Name
               </th>
               <th
                 scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Portion Size
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Portions Consumed
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                className="px-6 py-3 text-left text-xs font-medium text-beige-0 uppercase tracking-wider"
               >
                 Total Calories
               </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {foodData.map((food, index) => (
+            {(foodNames || []).map((name: string, index: number) => (
               <tr key={index}>
-                <td className="px-6 py-4 whitespace-nowrap">{food.foodName}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{food.portionSize}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{food.portionsConsumed}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{food.totalCalories}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{name}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{foodData?.[name]}</td>
               </tr>
             ))}
           </tbody>
